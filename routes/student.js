@@ -3,12 +3,22 @@ const router = express.Router()
 const Student = require("../models/student")
 
 router.post('/add-student', async (req, res) => {
-    const { name, phone } = req.body;
+    const { name, phone, standard } = req.body;
     try{
         const password = name + "@" + phone.slice(-4);
-        const student = new Student({ name, phone, password });
+        let fees;
+        if(std === 8){
+            fees = 10000
+        }
+        else if(std === 9){
+            fees = 15000
+        }
+        else if(std === 10){
+            fees = 20000
+        }
+        const student = new Student({ name, phone, password, standard, fees });
         await student.save();
-        res.send({ message: 'Student added successfully' });
+        res.send({ success: 'Student added successfully' });
     }
     catch(err){
         res.send({ error: err })
