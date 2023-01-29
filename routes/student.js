@@ -5,7 +5,9 @@ const Student = require("../models/student")
 router.post('/add-student', async (req, res) => {
     const { name, phone, standard } = req.body;
     try{
-        const password = name + "@" + phone.slice(-4);
+        var val = Math.floor(1000 + Math.random() * 9000);
+        const password = name + "@" + val;
+        const userid = name + "@" + phone;
         let fees;
         if(std === 8){
             fees = 10000
@@ -16,7 +18,7 @@ router.post('/add-student', async (req, res) => {
         else if(std === 10){
             fees = 20000
         }
-        const student = new Student({ name, phone, password, standard, fees });
+        const student = new Student({ name, phone, password, standard, fees, userid });
         await student.save();
         res.send({ success: 'Student added successfully' });
     }
