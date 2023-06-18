@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
+const fetchuser = require('./middleware/fetchUser');
 const app = express();
 dotenv.config();
 
@@ -20,7 +21,7 @@ mongoose.connection.on('error', err=>{
 
 app.use(express.json());
 
-app.use('/student',require('./routes/student'))
+app.use('/student',fetchuser,require('./routes/student'))
 app.use('/admin',require('./routes/admin'))
 
 const port=process.env.PORT; 

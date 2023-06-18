@@ -6,11 +6,11 @@ const time = require("../models/timetable")
 var val = Math.floor(1000 + Math.random() * 9000);
 
 exports.Addstudent = async (req, res) => {
-    const { name, phone, std} = req.body;
+    const { name, phone, standard, fees } = req.body;
     try{
         const password = name + "@" + val;
         const userid = name + "@" + phone;
-        const student = new Student({ name, phone, password , std ,userid});
+        const student = new Student({ name, phone, password , standard, fees });
         await student.save();
         res.status(201).json({ message: "Student added successfully"});
     }
