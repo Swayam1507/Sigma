@@ -5,8 +5,8 @@ const studentSchema = new Schema({
     name: { type: String, required: true },
     phone: { type: String, required: true },
     password: { type: String, required: true },
-    std: {type :String, required:true},
-    userid: {type:String,required :true}
+    standard: { type: Number, required: true },
+    fees: { type: Number, required: true }
 });
 
 module.exports = mongoose.model('Student', studentSchema);

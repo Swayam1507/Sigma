@@ -21,9 +21,10 @@ mongoose.connection.on('error', err=>{
 app.use(express.json());
 
 app.use('/student',require('./routes/student'))
+app.use('/admin',require('./routes/admin'))
 
 const port=process.env.PORT; 
 
-app.listen(port, () => {
-    console.log('Server started on port 3000');
+app.listen(port,() => {
+    console.log('Server started on port '+port);
 });
