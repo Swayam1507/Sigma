@@ -51,7 +51,7 @@ exports.Addexam = async (req,res) =>
     try{
         const exam = new Exam({date, subject, chapter, std, mark})
         await exam.save();
-        res.status(201).json({message :"Exam Created "});
+        res.status(201).json({message :"Exam Created"});
     }
     catch(err)
     {

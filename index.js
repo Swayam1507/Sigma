@@ -21,8 +21,9 @@ mongoose.connection.on('error', err=>{
 
 app.use(express.json());
 
-app.use('/student',fetchuser,require('./routes/student'))
 app.use('/admin',require('./routes/admin'))
+app.use('/student',fetchuser,require('./routes/student'))
+app.use('/standards',fetchuser,require('./routes/standards'))
 
 const port=process.env.PORT; 
 
