@@ -6,29 +6,25 @@ const time = require("../models/timetable")
 var val = Math.floor(1000 + Math.random() * 9000);
 
 exports.Addstudent = async (req, res) => {
-    const { name, phone, standard, fees } = req.body;
+    const { name, fatherNo, motherNo, selfNo, standard, fees } = req.body;
     try{
-        const password = name + "@" + val;
-        const userid = name + "@" + phone;
-        const student = new Student({ name, phone, password , standard, fees });
+        const student = new Student({ name, fatherNo, motherNo, selfNo, standard, fees, });
         await student.save();
-        res.status(201).json({ message: "Student added successfully"});
+        res.status(201).json({ success: true,msg: "Student added successfully"});
     }
     catch(err){
-        res.status(400).json({message : err.message});
+        res.status(400).json({success: false,msg : err.message});
     }
 };
 
 exports.Getstudents = async (req,res)=>
 {
-    const students =await Student.find({std:req.body.std})
-    if(students.length === 0)
-    {
-        res.status(404).json({'message':"No Students"});
-    }
-    else
-    {
+    const { std } = req.params;
+    try{
+        const students =await Student.find({standard: std})
         res.status(200).json({students});
+    } catch(error){
+        res.status(400).json({success: false,msg : error.message});
     }
 };
 

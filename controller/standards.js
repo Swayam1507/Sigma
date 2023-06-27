@@ -25,6 +25,57 @@ const addStandard = async (req,res) => {
         })
     }
 }
+const getStandards = async (req,res) => {
+    try {
+        const result = await standards.find({})
+        return res.status(200).send({
+            success: true,
+            list: result
+        })
+    } catch(error) {
+        return res.status(400).send({
+            success: false,
+            msg: error.message
+        })
+    }
+}
+const editStandard = async (req,res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    try {
+        await standards.findByIdAndUpdate(id, {
+            name: name
+        })
+        return res.status(200).send({
+            success: true,
+            msg: 'Standard updated successfully.'
+        })
+    } catch(error){
+        return res.status(400).send({
+            success: false,
+            msg: error.message
+        })
+    }
+}
+const deleteStandard = async (req,res) => {
+    const { id } = req.params;
+    try {
+        await standards.findByIdAndDelete(id)
+        return res.status(200).send({
+            success: true,
+            msg: 'Standard deleted successfully.'
+        })
+    } catch(error){
+        return res.status(400).send({
+            success: false,
+            msg: error.message
+        })
+    }
+}
+
 module.exports = {
-    addStandard
+    addStandard,
+    getStandards,
+    editStandard,
+    deleteStandard
 }
