@@ -52,7 +52,7 @@ const Login = () => {
                             fontSize="16px"
                             textAlign={matchDownSM ? 'center' : 'inherit'}
                           >
-                            Enter your phone number to continue
+                            Enter your name & password to continue
                           </Typography>
                         </Stack>
                       </Grid>

@@ -9,6 +9,7 @@ import APImanager from 'utils/APImanager';
 import { PhoneNumberContext } from 'contexts/PhoneNumberContext';
 import CustomAlert from 'components/CustomAlert';
 import NumberWithCountryCode from 'components/NumberWithCountryCode';
+import ReusableValidation from 'components/ReusableValidation/ReusableValidation';
 
 const apiManager = new APImanager();
 
@@ -20,29 +21,18 @@ const Login = ({ loginProp, ...others }) => {
   return (
     <Formik
       initialValues={{
-        phoneDetailObj: '',
-        checked: true
+        checked: true,
+        name: '',
+        password: ''
       }}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          if (!values.phoneDetailObj.phoneNumber) {
-            CustomAlert({
-              message: 'Please enter phone number',
-              color: 'error'
-            });
-            return;
-          }
-          const res = await apiManager.post('auth/admin-login', {
-            countryCode: values.phoneDetailObj.dialCode,
-            phoneNumber: values.phoneDetailObj.phoneNumber
+          const res = await apiManager.post('admin/login', {
+            name: values.name,
+            password: values.password,
           });
           if (!res.error) {
-            setDetail({
-              countryCode: values.phoneDetailObj.dialCode,
-              phoneNumber: values.phoneDetailObj.phoneNumber,
-              isRemember: values.checked
-            });
-            navigate('/otp-screen');
+            navigate('/admin-dashboard');
           }
         } catch (e) {
           console.error(e);
@@ -60,8 +50,11 @@ const Login = ({ loginProp, ...others }) => {
         setFieldValue
       }) => (
         <form noValidate onSubmit={handleSubmit} {...others}>
-          <FormControl fullWidth sx={{ ...theme.typography.customInput }}>
-            <NumberWithCountryCode fieldName="phoneDetailObj" />
+          <FormControl fullWidth>
+            <ReusableValidation fieldName="username" label="Username"/>
+          </FormControl>
+          <FormControl fullWidth>
+            <ReusableValidation fieldName="password" type="password" label="Password"/>
           </FormControl>
           <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
             <FormControlLabel
@@ -87,7 +80,7 @@ const Login = ({ loginProp, ...others }) => {
                 variant="contained"
                 color="secondary"
               >
-                Send Code
+                Login
               </Button>
             </AnimateButton>
           </Box>
