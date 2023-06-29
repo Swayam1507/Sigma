@@ -22,13 +22,13 @@ const Login = ({ loginProp, ...others }) => {
     <Formik
       initialValues={{
         checked: true,
-        name: '',
+        username: '',
         password: ''
       }}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           const res = await apiManager.post('admin/login', {
-            name: values.name,
+            name: values.username,
             password: values.password,
           });
           if (!res.error) {
@@ -51,10 +51,10 @@ const Login = ({ loginProp, ...others }) => {
       }) => (
         <form noValidate onSubmit={handleSubmit} {...others}>
           <FormControl fullWidth>
-            <ReusableValidation fieldName="username" label="Username"/>
+            <ReusableValidation fieldName="username" label="Username" required={true} />
           </FormControl>
           <FormControl fullWidth>
-            <ReusableValidation fieldName="password" type="password" label="Password"/>
+            <ReusableValidation fieldName="password" type="password" label="Password" required={true} />
           </FormControl>
           <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
             <FormControlLabel

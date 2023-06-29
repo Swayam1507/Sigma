@@ -18,15 +18,15 @@ export default class APIManager {
     if (response.status === 401) {
       window.location.href = '/login';
     }
-    if (data?.message) {
+    if (data?.msg) {
       if (!response.ok) {
         CustomAlert({
-          message: data.message,
+          message: data.msg,
           color: 'error'
         });
       } else if (response.ok) {
         CustomAlert({
-          message: data.message,
+          message: data.msg,
           color: 'success'
         });
       }
