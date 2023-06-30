@@ -3,7 +3,17 @@ const mongoose = require('mongoose')
 const dotenv = require("dotenv");
 const fetchuser = require('./middleware/fetchUser');
 const app = express();
+const cors = require('cors')
 dotenv.config();
+
+app.use(cors())
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 
 //connection establish with mongoatlas
@@ -25,7 +35,7 @@ app.use('/admin',require('./routes/admin'))
 app.use('/student',fetchuser,require('./routes/student'))
 app.use('/standards',fetchuser,require('./routes/standards'))
 
-const port=process.env.PORT; 
+const port=process.env.PORT;
 
 app.listen(port,() => {
     console.log('Server started on port '+port);
