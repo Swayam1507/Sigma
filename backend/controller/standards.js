@@ -28,11 +28,10 @@ const addStandard = async (req,res) => {
 const getStandards = async (req,res) => {
     try {
         const result = await standards.find({})
-        count = await result.count()
         return res.status(200).send({
             success: true,
             list: result,
-            count: count
+            count: result?.length
         })
     } catch(error) {
         return res.status(400).send({

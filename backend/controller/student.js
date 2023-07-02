@@ -22,7 +22,7 @@ exports.Getstudents = async (req,res)=>
     const { std } = req.params;
     try{
         const students =await Student.find({standard: std})
-        res.status(200).json({students});
+        res.status(200).json({success: true, list:students, count: students?.length});
     } catch(error){
         res.status(400).json({success: false,msg : error.message});
     }

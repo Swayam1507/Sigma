@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const fetchuser = require('./middleware/fetchUser');
 const app = express();
 const cors = require('cors')
-const cors = require('cors')
 dotenv.config();
 
 app.use(cors())
