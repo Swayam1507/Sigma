@@ -157,9 +157,10 @@ function CommonTable(props) {
   const getList = async () => {
     setLoading(true);
     let url = listUrl ? `${urlPrefix}/${listUrl}` : `${urlPrefix}/list`;
-    let queryString = `${url}?limit=${rowsPerPage}&pageNo=${page}&search=${search
-      ?.toString()
-      .trim()}`;
+    // let queryString = `${url}?limit=${rowsPerPage}&pageNo=${page}&search=${search
+    //   ?.toString()
+    //   .trim()}`;
+    let queryString = `${url}`;
 
     if (query) {
       Object.keys(query).map((e) => {

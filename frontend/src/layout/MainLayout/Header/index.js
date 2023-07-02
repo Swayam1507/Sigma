@@ -39,11 +39,11 @@ const Header = () => {
   };
 
   const setProfile = async () => {
-    const res = await apiManager.get('auth/profile');
+    // const res = await apiManager.get('auth/profile');
 
-    if (!res.error) {
-      setAuth(res.data);
-    }
+    // if (!res.error) {
+    //   setAuth(res.data);
+    // }
   };
 
   return (

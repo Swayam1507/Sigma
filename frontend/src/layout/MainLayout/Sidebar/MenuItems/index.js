@@ -22,10 +22,10 @@ const SidebarItems = {
       breadcrumbs: false
     },
     {
-      id: 'user',
-      title: 'Users',
+      id: 'student',
+      title: 'Students',
       type: 'item',
-      url: '/user',
+      url: '/student',
       icon: IconUserCircle,
       breadcrumbs: false
     },

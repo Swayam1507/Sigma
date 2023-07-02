@@ -43,8 +43,7 @@ export default class APIManager {
         method: method,
         headers: {
           accept: '*/*',
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
+          Authorization: `Bearer ${localStorage.getItem('token')}`        },
         body: body
       });
       const data = await response.json();
@@ -62,7 +61,8 @@ export default class APIManager {
           headers: {
             'Content-Type': 'application/json',
             accept: '*/*',
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'auth-token': `${localStorage.getItem('token')}`
           },
           body: JSON.stringify(body)
         });

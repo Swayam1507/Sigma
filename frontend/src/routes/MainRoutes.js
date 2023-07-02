@@ -2,6 +2,7 @@ import MainLayout from 'layout/MainLayout';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 import Dashboard from 'pages/Dashboard';
 import Country from 'pages/Country';
+import Standard from 'pages/Standards';
 import City from 'pages/City';
 import Subscription from 'pages/Subscription/Subscription';
 import User from 'pages/User/User';
@@ -24,8 +25,12 @@ const MainRoutes = {
       element: <Dashboard />
     },
     {
-      path: '/country',
+      path: '/student',
       element: <Country />
+    },
+    {
+      path: '/standard',
+      element: <Standard />
     },
     {
       path: '/city',

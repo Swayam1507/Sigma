@@ -32,6 +32,7 @@ const Login = ({ loginProp, ...others }) => {
             password: values.password,
           });
           if (!res.error) {
+            localStorage.setItem('token', res.data['token']);
             navigate('/admin-dashboard');
           }
         } catch (e) {
