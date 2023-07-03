@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { InputAdornment } from '@mui/material';
 import { Layout } from 'components/Layout/Layout';
 import ReusableValidation from 'components/ReusableValidation/ReusableValidation';
+import CustomAutoComplete from 'components/CustomAutoComplete';
 import SimpleModal from 'components/SimpleModal';
 import { Formik } from 'formik';
 import { forwardRef } from 'react';
@@ -68,36 +69,38 @@ const CountryAddEdit = forwardRef(
             handleSubmit={handleSubmit}
           >
             <ReusableValidation
-              fieldName="countryName"
-              label={'Country Name'}
+              fieldName="name"
+              label={'Student Name'}
               required={true}
-              inputProps={{
-                style: { textTransform: 'capitalize' }
-              }}
             />
-            ,
             <ReusableValidation
-              fieldName="countryCode"
-              label={'Country Code'}
+              fieldName="fatherNo"
+              label={'Father Number'}
               required={true}
-              control="countryCode"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    {/* <AttachmentRoundedIcon fontSize="small" /> */}
-                    <AddIcon fontSize="1.2rem" />
-                  </InputAdornment>
-                )
-              }}
-              // isSubmitting={isSubmitting}
             />
-            ,
             <ReusableValidation
-              fieldName="isoCountry"
-              label={'ISO Country'}
+              fieldName="name"
+              label={'Mother Number'}
               required={true}
-              control="isoCountry"
-              // isSubmitting={isSubmitting}
+            />
+            <ReusableValidation
+              fieldName="selfNo"
+              label={'Student Number'}
+              required={true}
+            />
+            <CustomAutoComplete
+                placeholder="Choose a standard"
+                url="standards/list"
+                fieldName="_id"
+                errorName={'Standard'}
+                required={true}
+                optionRow={['name']}
+                valueToShowInField="name"
+              />
+            <ReusableValidation
+              fieldName="fees"
+              label={'Fees'}
+              required={true}
             />
           </SimpleModal>
         )}

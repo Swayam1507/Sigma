@@ -35,10 +35,10 @@ function Country(props) {
   const navigate = useNavigate();
   return (
     <Fragment>
-      <CommonContainer urlPrefix={'standards/list'} fieldName='name' getValue={(standard)=>{
+      {/* <CommonContainer urlPrefix={'standards/list'} fieldName='name' getValue={(standard)=>{
         console.log({standard})
         navigate(`/student/standard/${standard._id}`)
-      }} />
+      }} /> */}
       {/* <CommonTable columns={columns} imageRequired={true} title={'Students'} urlPrefix="student">
         <CountryAddEdit type="addEdit" />
         <ImportFile

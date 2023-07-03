@@ -95,29 +95,16 @@ function CustomAutoComplete(props) {
       }
       const res = await apiManager.get(queryString);
 
-      if (!res?.error && res?.data?.data.length !== 0) {
-        let temp = res?.data?.data;
+      if (!res?.error && res?.data?.list.length !== 0) {
+        let temp = res?.data?.list;
         if (res.data.count) {
           setCount(res.data.count);
         }
         if (showFlag) {
           setImageUrl(res.data.imageUrl);
         }
-
-        if (url.includes('country')) {
-          temp = res.data.data.map((e) => {
-            return {
-              ...e,
-              countryName: capitalize(e.countryName)
-            };
-          });
-        }
         setData(temp);
-        let newOp = [];
-        for (let i = 0; i < pageLimit; i++) {
-          newOp.push(temp[i]);
-        }
-        setOptions(newOp);
+        setOptions(temp);
         setPage(1);
       }
     } catch (err) {

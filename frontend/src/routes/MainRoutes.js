@@ -26,10 +26,10 @@ const MainRoutes = {
       path: '/dashboard',
       element: <Dashboard />
     },
-    {
-      path: '/student/standards',
-      element: <StandardCards />
-    },
+    // {
+    //   path: '/student/standards',
+    //   element: <StandardCards />
+    // },
     {
       path: '/standards',
       element: <Standard />
@@ -59,7 +59,7 @@ const MainRoutes = {
       element: <RateList />
     },
     {
-      path: '/student/standard/:standard',
+      path: '/student',
       element: <Student />
     },
     {

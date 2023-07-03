@@ -25,7 +25,7 @@ const SidebarItems = {
       id: 'student',
       title: 'Students',
       type: 'item',
-      url: '/student/standards',
+      url: '/student',
       icon: IconUserCircle,
       breadcrumbs: false
     },
