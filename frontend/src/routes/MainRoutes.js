@@ -11,6 +11,8 @@ import SIPExtensions from 'pages/SIPExtensions/SIPExtensions';
 import PhoneNumber from 'pages/PhoneNumber';
 import Provider from 'pages/Provider/Provider';
 import RateList from 'pages/RateList/RateList';
+import StandardCards from 'pages/Student'
+import Student from 'pages/Student/Student'
 
 const MainRoutes = {
   path: '/',
@@ -25,11 +27,11 @@ const MainRoutes = {
       element: <Dashboard />
     },
     {
-      path: '/student',
-      element: <Country />
+      path: '/student/standards',
+      element: <StandardCards />
     },
     {
-      path: '/standard',
+      path: '/standards',
       element: <Standard />
     },
     {
@@ -55,6 +57,10 @@ const MainRoutes = {
     {
       path: '/rate-list/:type/:parentId/:providerName',
       element: <RateList />
+    },
+    {
+      path: '/student/standard/:standard',
+      element: <Student />
     },
     {
       path: '/user',

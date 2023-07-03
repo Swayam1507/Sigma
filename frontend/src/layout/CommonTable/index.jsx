@@ -18,7 +18,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableSortLabel
+  TableSortLabel,
+  Checkbox
 } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { visuallyHidden } from '@mui/utils';
@@ -51,7 +52,8 @@ function CommonTable(props) {
     initialQuery,
     queryOnly,
     children,
-    imageRequired
+    imageRequired,
+    appendUrl
   } = props;
   const [list, setList] = useState([]);
   const [data, setData] = useState(list);
@@ -162,6 +164,10 @@ function CommonTable(props) {
     //   .trim()}`;
     let queryString = `${url}`;
 
+    if(appendUrl){
+      queryString = queryString + `/${appendUrl}`
+    }
+
     if (query) {
       Object.keys(query).map((e) => {
         if (e) {
@@ -175,7 +181,7 @@ function CommonTable(props) {
     const res = await apiManager.get(`${queryString}`);
     setLoading(false);
     if (!res.error) {
-      setList(res.data.data);
+      setList(res.data.list);
       setCount(res.data.count);
       if (imageRequired) {
         setImageUrl(res.data.imageUrl);
@@ -244,6 +250,9 @@ function CommonTable(props) {
         {stableSort(data, getComparator(order, orderBy)).map((e) => {
           return (
             <TableRow key={e._id}>
+              <TableCell sx={{ py: 2 }} padding={'none'}>
+                <Checkbox color="secondary" />
+              </TableCell>
               {columns?.map((ele) => {
                 return (
                   <TableCell
@@ -289,6 +298,12 @@ function CommonTable(props) {
     return (
       <TableHead>
         <TableRow>
+            <TableCell
+              sx={{ py: 2 }}
+              padding={'none'}
+            >
+              <Checkbox color="secondary" />
+            </TableCell>
           {columns?.map((item) => (
             <TableCell
               key={item.id}

@@ -13,19 +13,7 @@ const apiManager = new APIManager();
 const CountryAddEdit = forwardRef(
   ({ getList, rowsPerPage, editData, setSearch, clearSearchField }, ref) => {
     let initialValues = {
-      countryName: editData.countryName || '',
-      countryCode: editData.countryCode || '',
-      isoCountry: editData.isoCountry || '',
-      flag: editData.flag || '',
-      isActive: editData.isActive || true,
-      capabilities: {
-        SMS: {
-          isCapable: false
-        },
-        Voice: {
-          isCapable: true
-        }
-      }
+      name: editData.name || ''
     };
     if (editData) {
       initialValues._id = editData._id;
@@ -38,8 +26,8 @@ const CountryAddEdit = forwardRef(
         onSubmit={async (values) => {
           const trimmedValues = trimValues(values);
           const res = editData
-            ? await apiManager.patch(`country/update/${initialValues._id}`, trimmedValues)
-            : await apiManager.post('country/create', trimmedValues);
+            ? await apiManager.put(`standards/edit/${initialValues._id}`, trimmedValues)
+            : await apiManager.post('standards/add', trimmedValues);
           if (!res.error) {
             ref.current.handleClose();
             getList();
@@ -68,37 +56,14 @@ const CountryAddEdit = forwardRef(
             handleSubmit={handleSubmit}
           >
             <ReusableValidation
-              fieldName="countryName"
-              label={'Country Name'}
+              fieldName="name"
+              label={'Standard Name'}
               required={true}
               inputProps={{
                 style: { textTransform: 'capitalize' }
               }}
             />
-            ,
-            <ReusableValidation
-              fieldName="countryCode"
-              label={'Country Code'}
-              required={true}
-              control="countryCode"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    {/* <AttachmentRoundedIcon fontSize="small" /> */}
-                    <AddIcon fontSize="1.2rem" />
-                  </InputAdornment>
-                )
-              }}
-              // isSubmitting={isSubmitting}
-            />
-            ,
-            <ReusableValidation
-              fieldName="isoCountry"
-              label={'ISO Country'}
-              required={true}
-              control="isoCountry"
-              // isSubmitting={isSubmitting}
-            />
+            
           </SimpleModal>
         )}
       </Formik>
