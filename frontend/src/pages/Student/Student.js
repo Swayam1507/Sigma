@@ -4,23 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import APIManager from 'utils/APImanager';
 import StudentAddEdit from './StudentAddEdit'
 
-const apiManager = new APIManager();
-
 function Student() {
-    const params = useParams();
-    const navigate = useNavigate();
-    const [list, setList] = useState([])
-    useEffect(async () => {
-        if (params?.standard) {
-            const list = await apiManager.get(`student/list/${params.standard}`)
-            setList(list);
-        } else {
-            navigate(-1);
-        }
-    }, [params]);
     const columns = [
         { id: 'name', label: 'Name' },
         { id: 'fatherNo', label: 'Father number' },
+        { id: 'standard.name', label: 'Standard' },
         {
           id: 'fees',
           label: 'Fees'

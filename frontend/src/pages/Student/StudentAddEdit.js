@@ -15,18 +15,13 @@ const CountryAddEdit = forwardRef(
   ({ getList, rowsPerPage, editData, setSearch, clearSearchField }, ref) => {
     let initialValues = {
       countryName: editData.countryName || '',
-      countryCode: editData.countryCode || '',
-      isoCountry: editData.isoCountry || '',
-      flag: editData.flag || '',
-      isActive: editData.isActive || true,
-      capabilities: {
-        SMS: {
-          isCapable: false
-        },
-        Voice: {
-          isCapable: true
-        }
-      }
+      name: editData.name || '',
+      fatherNo: editData.fatherNo || '',
+      name: editData.name || '',
+      motherNo: editData.motherNo || '',
+      selfNo: editData.selfNo || '',
+      standard: editData.standard || '',
+      fees: editData.fees || '',
     };
     if (editData) {
       initialValues._id = editData._id;
@@ -38,9 +33,10 @@ const CountryAddEdit = forwardRef(
         initialValues={initialValues}
         onSubmit={async (values) => {
           const trimmedValues = trimValues(values);
+          trimmedValues.standard = values?.standard?._id;
           const res = editData
-            ? await apiManager.patch(`country/update/${initialValues._id}`, trimmedValues)
-            : await apiManager.post('country/create', trimmedValues);
+            ? await apiManager.put(`student/edit/${initialValues._id}`, trimmedValues)
+            : await apiManager.post('student/add', trimmedValues);
           if (!res.error) {
             ref.current.handleClose();
             getList();
@@ -79,7 +75,7 @@ const CountryAddEdit = forwardRef(
               required={true}
             />
             <ReusableValidation
-              fieldName="name"
+              fieldName="motherNo"
               label={'Mother Number'}
               required={true}
             />
@@ -91,7 +87,7 @@ const CountryAddEdit = forwardRef(
             <CustomAutoComplete
                 placeholder="Choose a standard"
                 url="standards/list"
-                fieldName="_id"
+                fieldName="standard"
                 errorName={'Standard'}
                 required={true}
                 optionRow={['name']}

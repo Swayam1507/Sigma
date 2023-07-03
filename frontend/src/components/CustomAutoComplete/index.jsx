@@ -231,7 +231,7 @@ function CustomAutoComplete(props) {
         value={getValue()}
         onBlur={onBlur}
         onInputChange={(e) => {
-          if (e.target.value) {
+          if (e?.target?.value) {
             setInputValue(e?.target?.value);
           }
         }}
