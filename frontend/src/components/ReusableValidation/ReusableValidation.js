@@ -1,7 +1,7 @@
 import { useEffect, memo } from 'react';
 import { FormControl, FormHelperText, TextField } from '@mui/material';
 import { useField } from 'formik';
-import DateTimePicker from '@mui/x-date-pickers';
+import {DateTimePicker} from '@mui/x-date-pickers';
 import {
   countryCodeRegex,
   onlyNumber,
