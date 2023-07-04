@@ -21,7 +21,6 @@ exports.Addstudent = async (req, res) => {
 
 exports.Getstudents = async (req,res)=>
 {
-    const { std } = req.params;
     const parsedUrl = url.parse(req.url);
     const queryParams = querystring.parse(parsedUrl.query);
     console.log({queryParams})

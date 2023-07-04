@@ -13,6 +13,7 @@ import Provider from 'pages/Provider/Provider';
 import RateList from 'pages/RateList/RateList';
 import StandardCards from 'pages/Student'
 import Student from 'pages/Student/Student'
+import Exam from 'pages/Exams'
 
 const MainRoutes = {
   path: '/',
@@ -33,6 +34,10 @@ const MainRoutes = {
     {
       path: '/standards',
       element: <Standard />
+    },
+    {
+      path: '/exam',
+      element: <Exam />
     },
     {
       path: '/city',

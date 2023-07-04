@@ -1,6 +1,7 @@
 import { useEffect, memo } from 'react';
 import { FormControl, FormHelperText, TextField } from '@mui/material';
 import { useField } from 'formik';
+import DateTimePicker from '@mui/x-date-pickers';
 import {
   countryCodeRegex,
   onlyNumber,
@@ -36,7 +37,7 @@ const ReusableValidation = memo((props) => {
   const validation = (value) => {
     let error = null;
     if (required && typeof value === 'string' && !value?.trim()) {
-      error = `${label} is required`;
+      error = `${label} is reuqired`;
     } else if (control) {
       switch (control) {
         case 'isValidPhoneNumber':
@@ -128,7 +129,7 @@ const ReusableValidation = memo((props) => {
 
   return (
     <FormControl disabled={disabled} fullWidth error={hasError} sx={{ mt: 1, mb: 0.5 }}>
-      <TextField
+      {type !== 'date' && <TextField
         type={type || 'text'}
         label={label}
         error={hasError}
@@ -152,7 +153,17 @@ const ReusableValidation = memo((props) => {
         }}
         inputProps={{ maxLength, autoComplete: 'off', ...inputProps }}
         InputProps={{ ...InputProps }}
-      />
+      />}
+      {type === 'date' && <DateTimePicker
+        renderInput={(props) => <TextField error={hasError} fullWidth {...props} />}
+        label={label}
+        name={name}
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          onChange && onChange(value);
+        }}
+      />}
       {hasError && (
         <FormHelperText error id="standard-weight-helper-text--register">
           {error}
