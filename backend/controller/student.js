@@ -8,9 +8,9 @@ const url = require('url')
 var val = Math.floor(1000 + Math.random() * 9000);
 
 exports.Addstudent = async (req, res) => {
-    const { name, fatherNo, motherNo, selfNo, standard, fees } = req.body;
+    const { name, fatherNo, otherNo, standard, fees } = req.body;
     try{
-        const student = new Student({ name, fatherNo, motherNo, selfNo, standard, fees, });
+        const student = new Student({ name, fatherNo, otherNo, standard, fees, });
         await student.save();
         res.status(201).json({ success: true,msg: "Student added successfully"});
     }
