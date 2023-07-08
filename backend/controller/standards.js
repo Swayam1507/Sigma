@@ -2,7 +2,7 @@ const standards = require("../models/standards");
 
 
 const addStandard = async (req,res) => {
-    const { name } = req.body;
+    const { name, fees } = req.body;
     try {
         const foundOne = await standards.findOne({name})
         if(foundOne){
@@ -11,7 +11,7 @@ const addStandard = async (req,res) => {
                 msg: 'Standard with this name already exists.'
             })
         }
-        const response = await standards.create({name})
+        const response = await standards.create({name, fees})
         if(response){
             res.status(200).send({
                 success: true,
