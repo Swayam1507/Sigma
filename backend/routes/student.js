@@ -3,7 +3,7 @@ const router = express.Router()
 const{Addstudent,Getstudents,Addtimetable,Addexam,Getexam,deleteStudent,editStudent} = require("../controller/student")
 
 router.post('/add',Addstudent)
-router.get('/list',Getstudents)
+router.post('/list',Getstudents)
 router.delete('/delete/:id',deleteStudent)
 router.put('/edit/:id',editStudent)
 router.post('/add-timetable',Addtimetable)

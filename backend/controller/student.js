@@ -22,11 +22,14 @@ exports.Addstudent = async (req, res) => {
 
 exports.Getstudents = async (req,res)=>
 {
-    const parsedUrl = url.parse(req.url);
-    const queryParams = querystring.parse(parsedUrl.query);
-    console.log({queryParams})
+    const { standard } = req.body;
     try{
-        const students =await Student.find().populate('standard').exec()
+        let students = [];
+        if(standard){
+            students =await Student.find({ standard }).populate('standard').exec()
+        } else {
+            students =await Student.find().populate('standard').exec()
+        }
         res.status(200).json({success: true, list:students, count: students?.length});
     } catch(error){
         res.status(400).json({success: false,msg : error.message});
