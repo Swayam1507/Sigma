@@ -6,7 +6,8 @@ const studentSchema = new Schema({
     fatherNo: { type: Number, required: true },
     otherNo: { type: Number },
     standard: { type: mongoose.Types.ObjectId, required: true, ref: 'Standards', index: true },
-    fees: { type: Number, required: true }
+    fees: { type: Number, required: true },
+    roleNo: { type: Number, required: true}
 },
     {timestamps: true}
 );

@@ -27,7 +27,7 @@ const addStandard = async (req,res) => {
 }
 const getStandards = async (req,res) => {
     try {
-        const result = await standards.find({})
+        const result = await standards.find({}).sort({ 'updatedAt': -1 })
         return res.status(200).send({
             success: true,
             list: result,

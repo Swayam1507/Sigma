@@ -10,6 +10,7 @@ var val = Math.floor(1000 + Math.random() * 9000);
 exports.Addstudent = async (req, res) => {
     const { name, fatherNo, otherNo, standard, fees } = req.body;
     try{
+        console.log({lastAddedStudent: await Student.findOne().sort({ 'createdAt': -1 })})
         const student = new Student({ name, fatherNo, otherNo, standard, fees, });
         await student.save();
         res.status(201).json({ success: true,msg: "Student added successfully"});
@@ -89,8 +90,11 @@ exports.editStudent = async (req,res) => {
     const { id } = req.params;
     const { name, fatherNo, motherNo, selfNo, standard, fees } = req.body;
     try {
+        console.log({lastAddedStudentInEdit: await Student.findOne().sort({ 'createdAt': -1 })})
+        const highestRoleNumber = await Student.findOne({standard}).sort({ 'createdAt': -1})?.roleNo;
+        console.log({highestRoleNumber},'sldkfj')
         await Student.findByIdAndUpdate(id, {
-            name, fatherNo, motherNo, selfNo, standard, fees
+            name, fatherNo, motherNo, selfNo, standard, fees, roleNo: highestRoleNumber + 1
         })
         return res.status(200).send({
             success: true,

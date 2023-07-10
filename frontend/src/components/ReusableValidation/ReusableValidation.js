@@ -1,7 +1,10 @@
 import { useEffect, memo } from 'react';
 import { FormControl, FormHelperText, TextField } from '@mui/material';
 import { useField } from 'formik';
-import {DateTimePicker} from '@mui/x-date-pickers';
+import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import moment from 'moment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {
   countryCodeRegex,
   onlyNumber,
@@ -154,16 +157,21 @@ const ReusableValidation = memo((props) => {
         inputProps={{ maxLength, autoComplete: 'off', ...inputProps }}
         InputProps={{ ...InputProps }}
       />}
-      {type === 'date' && <DateTimePicker
-        renderInput={(props) => <TextField error={hasError} fullWidth {...props} />}
-        label={label}
-        name={name}
-        value={value}
-        onChange={(value) => {
-          setValue(value);
-          onChange && onChange(value);
-        }}
-      />}
+      {type === 'date' && (
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+          <DateTimePicker
+            renderInput={(props) => <TextField error={hasError} fullWidth {...props} />}
+            label={label}
+            views={['year', 'month', 'day', 'hours', 'minutes']}
+            name={name}
+            // value={moment()}
+            onChange={(value) => {
+              setValue(value);
+              onChange && onChange(value);
+            }}
+          />
+        </LocalizationProvider>
+      )}
       {hasError && (
         <FormHelperText error id="standard-weight-helper-text--register">
           {error}
