@@ -10,8 +10,9 @@ var val = Math.floor(1000 + Math.random() * 9000);
 exports.Addstudent = async (req, res) => {
     const { name, fatherNo, otherNo, standard, fees } = req.body;
     try{
-        console.log({lastAddedStudent: await Student.findOne().sort({ 'createdAt': -1 })})
-        const student = new Student({ name, fatherNo, otherNo, standard, fees, });
+        const lastAddedStudent = await Student.findOne().sort({ 'createdAt': -1 })
+        const roleNo = lastAddedStudent?.roleNo || 0;
+        const student = new Student({ name, fatherNo, otherNo, standard, fees, roleNo: (roleNo + 1) || 1 });
         await student.save();
         res.status(201).json({ success: true,msg: "Student added successfully"});
     }
